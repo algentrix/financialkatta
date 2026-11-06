@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Open Sans", system-ui, sans-serif;
+  --font-serif: "Open Sans", system-ui, sans-serif;
+
+  /* Measured from the public CancerIQ homepage: sage action, slate text, gray bar, near-black close. */
+  --color-forest: #67ba94;
+  --color-forest-deep: #4f9d78;
+  --color-leaf: #67ba94;
+  --color-ink: #444444;
+  --color-muted: #6a6b80;
+  --color-sun: #67ba94;
+  --color-sun-deep: #4f9d78;
+  --color-cream: #ffffff;
+  --color-mint: #f4fbf7;
+  --color-line: #e6e6e6;
+  --color-white: #ffffff;
+  --color-night: #1e1e1e;
+
+  --color-navy: #444444;
+  --color-navy-soft: #1e1e1e;
+  --color-emerald: #67ba94;
+  --color-emerald-dark: #4f9d78;
+  --color-gold: #67ba94;
+  --color-gold-deep: #3d7d60;
+  --color-canvas: #f2f2f2;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-weight: 300;
+  }
+
+  h2,
+  h3 {
+    font-weight: 700;
+  }
+
+  ::selection {
+    background: #67ba94;
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #67ba94;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+.prose-measure {
+  max-width: 68ch;
+}
+
+.hero-wash {
+  background:
+    radial-gradient(ellipse at 78% 18%, rgba(106, 107, 128, 0.16), transparent 52%),
+    radial-gradient(ellipse at 12% 88%, rgba(103, 186, 148, 0.14), transparent 46%),
+    #ffffff;
+}
+
+.btn-sage {
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #67ba94;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.btn-sage:hover {
+  background: #4f9d78;
+}
+
+.btn-line {
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: 1px solid #67ba94;
+  background: transparent;
+  color: #67ba94;
+  padding: 11px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.btn-line:hover {
+  background: #f4fbf7;
+}

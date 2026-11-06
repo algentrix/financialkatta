@@ -1,0 +1,32 @@
+{
+  "name": "financialkatta",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "tsx scripts/verify-calculators.ts && tsx scripts/write-og-image.ts && tsx scripts/write-sitemap.ts",
+    "build": "tsc && vite build && tsx scripts/prerender-html.ts",
+    "preview": "vite preview",
+    "verify": "tsx scripts/verify-calculators.ts"
+  },
+  "dependencies": {
+    "framer-motion": "^12.39.0",
+    "lucide-react": "^0.577.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-helmet-async": "^3.0.0",
+    "react-router-dom": "^7.13.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react-swc": "^3.11.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1",
+    "tsx": "^4.20.6",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1"
+  }
+}
