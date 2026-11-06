@@ -24,7 +24,7 @@ export const legalDocuments: LegalDocument[] = [
         id: "who",
         heading: "Who this notice describes",
         paragraphs: [
-          "This notice describes the public website of FinancialKatta, a financial services practice based in Pune, Maharashtra, India. The site is static. It does not create customer accounts and it does not have its own database.",
+          "This notice describes the public website of FinancialKatta, the practice of Prasad Prakashrao Chidrawar of Prasad Star Trading Company, based in Pune, Maharashtra, India. The site is static. It does not create customer accounts and it does not have its own database.",
         ],
       },
       {

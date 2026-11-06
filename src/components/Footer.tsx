@@ -21,6 +21,7 @@ export function Footer() {
             <BrandMark className="h-11 w-11" />
             <p className="font-serif text-[1.65rem] font-semibold leading-none">{site.name}</p>
           </div>
+          {site.legalName ? <p className="mt-4 text-sm text-white/75">{site.legalName}</p> : null}
           <p className="mt-4 text-sm leading-relaxed text-white/75">{site.supporting}</p>
           <p className="mt-4 text-sm text-white/75">
             {site.location.city}, {site.location.state}, {site.location.country}
@@ -100,7 +101,7 @@ export function Footer() {
           ) : null}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
             <p>
-              © {new Date().getFullYear()} {site.legalName || site.name}. {site.location.city}. Designed by{" "}
+              © {new Date().getFullYear()} {site.name}. {site.location.city}. Designed by{" "}
               <a href="https://algentrix.com" className="text-gold hover:text-white" target="_blank" rel="noopener noreferrer">
                 Algentrix
               </a>

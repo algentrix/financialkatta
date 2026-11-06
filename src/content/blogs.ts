@@ -159,7 +159,54 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "which-loan-is-for-which-job",
+    title: "Which loan is for which job",
+    description:
+      "A home loan, a loan against property, a personal loan and a business loan are not interchangeable. The use comes first.",
+    date: "2026-11-06",
+    readingMinutes: 6,
+    category: "Loans",
+    sections: [
+      {
+        heading: "Match the loan to the use",
+        paragraphs: [
+          "A home loan is for buying, building or renovating a house, with that property as security. A loan against property borrows against a home or shop you already own, for business, education or another need you can explain. A personal loan is unsecured and is often used for a medical bill, a wedding, travel or clearing other dues. A business loan is for the business itself: equipment, expansion, day-to-day working capital, or money against invoices.",
+          "The lender decides whether to offer any of these. An enquiry is not a sanction.",
+        ],
+      },
+      {
+        heading: "Why the security changes the rate",
+        paragraphs: [
+          "A home loan is usually cheaper and longer, sometimes up to about 30 years, because the house is the security. A loan against property usually costs more than a home loan and less than a personal loan. A personal loan is shorter, often one to five years, and the rate is higher because nothing is mortgaged.",
+          "Tax benefits sometimes discussed for a home loan, including Sections 80C and 24(b), belong to the old tax regime and to the law at the time. This article is not tax advice.",
+        ],
+      },
+      {
+        heading: "Business facilities are several products",
+        paragraphs: [
+          "A term loan suits expansion or machinery. A cash credit, overdraft or working-capital limit suits daily operations. MSME and Mudra loans are scheme-based facilities for smaller businesses. Invoice discounting raises money against bills customers have not paid yet. Each one still needs the lender’s documents, not only a conversation.",
+        ],
+      },
+    ],
+  },
 ]
+
+const categoryOrder = ["Investing", "Insurance", "Loans", "Bonds", "Planning"]
+
+export function postsByCategory() {
+  const groups = new Map<string, BlogPost[]>()
+  for (const post of posts) {
+    const list = groups.get(post.category) ?? []
+    list.push(post)
+    groups.set(post.category, list)
+  }
+  const names = [
+    ...categoryOrder.filter((name) => groups.has(name)),
+    ...[...groups.keys()].filter((name) => !categoryOrder.includes(name)),
+  ]
+  return names.map((title) => ({ title, posts: groups.get(title) ?? [] }))
+}
 
 export function getPost(slug: string) {
   return posts.find((post) => post.slug === slug)

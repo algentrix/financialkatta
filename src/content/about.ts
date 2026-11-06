@@ -3,7 +3,7 @@ export const aboutContent = {
   description:
     "FinancialKatta is a Pune-based financial services practice. We explain investments, insurance, loans and wealth planning in plain language.",
   paragraphs: [
-    "FinancialKatta works with individuals, salaried professionals, families, business owners and clients whose finances need more careful planning. The practice is based in Pune and speaks with customers across India.",
+    "FinancialKatta is the website of Prasad Prakashrao Chidrawar, who works through Prasad Star Trading Company in Pune. He speaks with individuals, salaried professionals, families and business owners.",
     "The conversation starts with the job the money has to do. A goal, a time horizon and the ability to live with a fall in value come before a product name. Mutual funds, insurance, loans and bonds are tools. They help only when they fit.",
     "We explain the choice in everyday language, including costs, lock-ins and the risks that are easy to skip. Where a lender, an insurer or an asset management company has to decide, the result depends on their process and on the information you submit. FinancialKatta does not promise approval, returns or a claim payment.",
   ],

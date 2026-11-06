@@ -1,9 +1,22 @@
 import type { WhatsAppIntent } from "../config/site"
 
+export type ServiceProduct = {
+  name: string
+  use: string
+}
+
+export type ServiceStart = {
+  label: string
+  href: string
+  note: string
+}
+
 export type ServiceSection = {
   heading: string
   paragraphs: string[]
   points?: string[]
+  pointsLabel?: string
+  products?: ServiceProduct[]
 }
 
 export type ServicePage = {
@@ -17,6 +30,7 @@ export type ServicePage = {
   risks: string[]
   intent: WhatsAppIntent
   calculators: { label: string; to: string }[]
+  start?: ServiceStart
 }
 
 export const services: ServicePage[] = [
@@ -31,6 +45,11 @@ export const services: ServicePage[] = [
     intro:
       "A mutual fund pools money from many investors and invests it according to the scheme’s stated objective. You hold units. Their value is the net asset value, which changes as the underlying investments change.",
     intent: "mutualFunds",
+    start: {
+      label: "Get started",
+      href: "https://www.assetplus.in/mfd/ARN-272207",
+      note: "Hey, I'm inviting you to invest with me on AssetPlus — India's leading Mutual Fund Distribution Platform. Join an ever-growing network of smart investors and take the first step towards maximising your wealth today! Fill this form to join as my client today.",
+    },
     calculators: [
       { label: "SIP calculator", to: "/calculators/sip" },
       { label: "Lumpsum calculator", to: "/calculators/lumpsum" },
@@ -80,6 +99,21 @@ export const services: ServicePage[] = [
         ],
       },
       {
+        heading: "What each option is used for",
+        paragraphs: [
+          "The scheme documents decide the actual portfolio. This list is only the everyday job of each route.",
+        ],
+        products: [
+          { name: "Equity fund", use: "Used when the money can stay invested through sharp falls, usually for a goal that is many years away." },
+          { name: "Debt fund", use: "Used for a more stable part of a portfolio. It can still fall when interest rates move or an issuer fails to pay." },
+          { name: "Hybrid fund", use: "Used when you want one scheme that mixes shares and bonds. The mix in the document is the risk, not the word balanced." },
+          { name: "SIP", use: "Used to invest a fixed amount on a regular date from monthly surplus. It spreads purchase dates. It does not remove market risk." },
+          { name: "Lumpsum", use: "Used when a sum is already available and you invest it at one time." },
+          { name: "STP", use: "Used to move money from one scheme to another in instalments, often from a quieter scheme into a growth scheme." },
+          { name: "SWP", use: "Used to withdraw a regular amount from a scheme you already hold, for example in later years. Withdrawals can shrink the corpus." },
+        ],
+      },
+      {
         heading: "Risk and investment horizon",
         paragraphs: [
           "Match the scheme category to the date the money is needed and to the decline you can accept without abandoning the goal. Money needed soon does not belong in a volatile equity scheme just because the long-term chart looks smooth.",
@@ -107,29 +141,37 @@ export const services: ServicePage[] = [
     calculators: [{ label: "Loan EMI calculator", to: "/calculators/emi" }],
     sections: [
       {
-        heading: "Home loans",
+        heading: "Home loan",
         paragraphs: [
-          "A home loan is usually secured by the property you buy or build. The lender checks income, existing EMIs, credit history and the property’s own papers and valuation.",
-          "A longer tenure lowers the monthly EMI and usually increases the total interest paid. Prepayment rules differ by lender and by the type of interest rate.",
+          "Used for buying, constructing or renovating a house. The property itself is the security. Tenures can go up to about 30 years. Because the loan is secured, the rate is usually lower than an unsecured personal loan.",
+          "Tax benefits can be available under Sections 80C and 24(b) in the old tax regime. Whether they apply depends on the regime you use and the law at the time. This page is not tax advice. The lender still decides eligibility from income, existing EMIs, credit history and the property papers.",
         ],
       },
       {
-        heading: "Personal loans",
+        heading: "Loan against property (LAP)",
         paragraphs: [
-          "Personal loans are often unsecured. Tenures are usually shorter than a home loan, and the interest rate offered depends on the lender’s reading of your profile.",
-          "Borrow for a reason you can name, and only if the EMI fits the monthly budget after essential expenses and existing commitments.",
+          "Used when you mortgage a residential or commercial property you already own and borrow against the lender’s valuation. People use it for business expansion, education or another personal need.",
+          "The rate is usually higher than a home loan and lower than a personal loan. If repayments are missed, the property used as security can be at risk.",
+        ],
+      },
+      {
+        heading: "Personal loan",
+        paragraphs: [
+          "Used when you need an unsecured loan with a flexible end use, such as a medical bill, a wedding, travel or consolidating other dues. Tenure is usually one to five years, and the interest rate is relatively high.",
+          "Take it only if the EMI still fits after essential expenses and the loans you already pay.",
         ],
       },
       {
         heading: "Business loans",
         paragraphs: [
-          "Business facilities are assessed on the purpose, the vintage of the business, income records and, where the product requires it, collateral. A profitable year in conversation is not the same as the documents a lender will ask to see.",
+          "Used to fund a business need that you can name. The lender looks at the purpose, how long the business has run, income records and, where the product needs it, collateral.",
         ],
-      },
-      {
-        heading: "Loan against property",
-        paragraphs: [
-          "A loan against property uses an existing property as security. The amount is linked to the lender’s valuation and to your repayment capacity. If repayments are missed, the security can be at risk.",
+        products: [
+          { name: "Term loan", use: "Used for expansion or for buying equipment, repaid over an agreed period." },
+          { name: "Working capital, cash credit or overdraft", use: "Used for day-to-day operations, such as stock and receivables, within a limit the lender sets." },
+          { name: "MSME and Mudra loans", use: "Used by small businesses under government-backed schemes. The scheme rules and the lender’s credit check both apply." },
+          { name: "Invoice discounting or factoring", use: "Used to raise money against receivables instead of waiting for customers to pay." },
+          { name: "Machinery or equipment loan", use: "Used to buy the machine or equipment the business needs to operate." },
         ],
       },
       {
@@ -169,40 +211,121 @@ export const services: ServicePage[] = [
       {
         heading: "Life insurance",
         paragraphs: [
-          "Life insurance pays on death during the policy term and, in some products, on survival. Protection and investment are different jobs. If a illustration shows a future value, separate what is guaranteed from what is assumed.",
+          "Used to provide money to the family or nominee if the insured person dies. Some policies also pay a maturity benefit or an investment-related benefit. What is paid depends on the policy.",
+          "Example: a person buys a term policy of ₹1 crore. If the insured person dies during the term, the nominee receives ₹1 crore, subject to the policy conditions.",
         ],
-      },
-      {
-        heading: "Term insurance",
-        paragraphs: [
-          "Term insurance is primarily death cover for a chosen term. A pure term plan typically pays nothing if the insured person survives the term. That is why a large cover can cost less than a savings-linked policy.",
-          "The sum assured should be thought about from the family’s expenses and liabilities, not from a round number alone. Medical tests and honest disclosures in the proposal affect the contract.",
+        products: [
+          { name: "Term insurance", use: "Used for a high life cover over a fixed period. The nominee is paid the sum assured if the insured dies during the term." },
+          { name: "Whole life insurance", use: "Used for life cover that continues for the insured person’s life, subject to the policy terms." },
+          { name: "Endowment plan", use: "Used when you want life cover together with a savings benefit, paid on maturity or on death as the policy specifies." },
+          { name: "Money back policy", use: "Used when you want periodic payouts during the term as well as life cover." },
+          { name: "ULIP", use: "Used when you want life cover and a market-linked investment in one policy. The investment value can fall." },
+          { name: "Child insurance plan", use: "Used by parents who want a fund earmarked for a child’s education and future needs, together with the life cover the policy describes." },
+          { name: "Pension or retirement plan", use: "Used to build a retirement corpus and, where the policy says so, to receive income after retirement." },
+          { name: "Annuity plan", use: "Used to receive a regular income in exchange for a lump sum or an accumulated retirement corpus." },
+          { name: "Group life insurance", use: "Used to give life cover to employees or members of an organisation under one arrangement." },
         ],
       },
       {
         heading: "Health insurance",
         paragraphs: [
-          "Health insurance contributes towards eligible hospital expenses as the policy defines them. Waiting periods, room-rent limits, co-pay, sub-limits, network hospitals and pre-existing conditions change the outcome.",
-          "Read the exclusions before you treat the sum insured as the amount you will receive.",
+          "Used to pay eligible medical expenses from illness, accidents, hospitalisation and certain other healthcare needs. The sum insured is not the same as the amount you will receive.",
+          "Example: a policy has a sum insured of ₹10 lakh. If a covered hospital bill is ₹5 lakh, the insurer pays the admissible amount under the policy terms.",
         ],
-      },
-      {
-        heading: "General insurance",
-        paragraphs: [
-          "General insurance covers non-life risks such as property and other named events. Each policy has its own insured events and its own list of what is left out. A household or shop policy should be matched to what you actually own.",
+        products: [
+          { name: "Individual health insurance", use: "Used to cover one person for eligible medical expenses." },
+          { name: "Family floater", use: "Used to cover several family members under one shared sum insured." },
+          { name: "Senior citizen health insurance", use: "Used for people who are generally 60 or older." },
+          { name: "Critical illness insurance", use: "Used to pay a lump sum if a specified critical illness is diagnosed, subject to the policy." },
+          { name: "Personal accident insurance", use: "Used for accidental death, disability and other covered accidental injuries. Illness is usually outside this cover." },
+          { name: "Top-up health insurance", use: "Used for extra cover after a stated deductible on a single claim is crossed." },
+          { name: "Super top-up health insurance", use: "Used for extra cover after eligible claims in the policy year add up past the deductible." },
+          { name: "Group health insurance", use: "Used by an employer to cover employees." },
+          { name: "Maternity insurance", use: "Used for specified pregnancy, delivery and related expenses, usually after a waiting period and within limits." },
+          { name: "Disease-specific insurance", use: "Used for one named disease or medical condition rather than general hospitalisation." },
+          { name: "OPD insurance", use: "Used for eligible outpatient costs such as consultations, tests and prescribed medicines." },
+          { name: "Overseas medical insurance", use: "Used for eligible medical emergencies while travelling outside India." },
         ],
       },
       {
         heading: "Motor insurance",
         paragraphs: [
-          "In India, third-party motor insurance is a legal requirement for a vehicle used in a public place. Own-damage cover is a separate contract and has its own deductions and exclusions.",
-          "Declare modifications and the correct use of the vehicle. A claim can be affected by delay, by the driver and by what the policy says about those facts.",
+          "Used to protect a vehicle owner against accidents, theft, damage and legal liability to other people. Third-party cover is mandatory for a vehicle used in a public place in India.",
+        ],
+        products: [
+          { name: "Third-party insurance", use: "Used to meet legal liability for injury, death or property damage caused to a third party." },
+          { name: "Comprehensive insurance", use: "Used for third-party liability and for damage to your own vehicle, subject to the policy." },
+          { name: "Standalone own-damage insurance", use: "Used for damage to the insured vehicle. The mandatory third-party policy still has to be bought separately." },
+          { name: "Two-wheeler insurance", use: "Used for motorcycles and scooters." },
+          { name: "Commercial vehicle insurance", use: "Used for vehicles that earn income, such as taxis, trucks and buses." },
+        ],
+        pointsLabel: "Popular motor insurance add-ons",
+        points: [
+          "Zero depreciation cover",
+          "Roadside assistance",
+          "Engine protection",
+          "Return to invoice",
+          "Consumables cover",
+          "Key replacement",
+          "Tyre protection",
+          "Personal belongings cover",
         ],
       },
       {
-        heading: "Personal accident insurance",
+        heading: "Travel insurance",
         paragraphs: [
-          "Personal accident cover pays for accidental death or disability as the policy defines those words. Illness is usually outside this cover. The definition of disability, and any waiting or survival period, decides whether a benefit is payable.",
+          "Used to cover specified losses on a domestic or international journey, such as a medical emergency, lost baggage or a cancelled trip.",
+        ],
+        products: [
+          { name: "International travel insurance", use: "Used for eligible medical emergencies and travel losses outside India." },
+          { name: "Domestic travel insurance", use: "Used for a journey inside India." },
+          { name: "Student travel insurance", use: "Used by students who are studying overseas." },
+          { name: "Senior citizen travel insurance", use: "Used by older travellers, on the terms written for that age." },
+          { name: "Corporate travel insurance", use: "Used for employees travelling on business." },
+          { name: "Multi-trip travel insurance", use: "Used when several trips fall inside one policy period." },
+        ],
+        pointsLabel: "Benefits travel policies often include",
+        points: [
+          "Emergency medical expenses",
+          "Loss of baggage",
+          "Passport loss",
+          "Flight cancellation or delay",
+          "Trip cancellation or interruption",
+          "Personal accident cover",
+        ],
+      },
+      {
+        heading: "Property and home insurance",
+        paragraphs: [
+          "Used to protect a home, a building or the things inside it against risks the policy names, such as fire or burglary.",
+        ],
+        products: [
+          { name: "Home building insurance", use: "Used to cover the residential building against the risks named in the policy." },
+          { name: "Home contents insurance", use: "Used to cover household belongings such as furniture, appliances and electronics." },
+          { name: "Fire insurance", use: "Used for specified losses from fire and the other perils the policy lists with it." },
+          { name: "Burglary insurance", use: "Used for specified losses from burglary or theft." },
+          { name: "Shop insurance", use: "Used to protect a shop’s premises, stock and other insured assets." },
+          { name: "Office insurance", use: "Used to cover an office, its equipment and its contents against insured risks." },
+        ],
+      },
+      {
+        heading: "Commercial and business insurance",
+        paragraphs: [
+          "Used to protect a business against losses from accidents, liabilities, employees and interruptions, as each policy defines them.",
+        ],
+        products: [
+          { name: "Marine insurance", use: "Used to cover goods and cargo in transit by sea, air, road or rail, on the policy terms." },
+          { name: "Fire and special perils", use: "Used to cover insured property against fire and the other perils named in the policy." },
+          { name: "Machinery breakdown", use: "Used for accidental physical damage to insured machinery." },
+          { name: "Engineering insurance", use: "Used for specified risks in construction, erection and engineering projects." },
+          { name: "Business interruption", use: "Used for a specified loss of business income after insured damage." },
+          { name: "Public liability", use: "Used for specified legal liability towards members of the public." },
+          { name: "Professional indemnity", use: "Used for specified claims of professional negligence." },
+          { name: "Product liability", use: "Used for specified legal liability arising from a defective product." },
+          { name: "Cyber insurance", use: "Used for specified financial losses from a cyber incident." },
+          { name: "Workmen compensation", use: "Used for an employer’s liability for specified employee injuries or occupational disease." },
+          { name: "Directors and officers (D&O)", use: "Used to protect directors and officers against specified claims about their management decisions." },
+          { name: "Fidelity guarantee", use: "Used for specified financial loss caused by an employee’s dishonesty." },
         ],
       },
     ],
@@ -248,6 +371,18 @@ export const services: ServicePage[] = [
         paragraphs: [
           "The coupon is the interest rate printed on the bond. The yield is the return implied by the price you pay, the coupons and the time left to maturity. Buying above or below face value makes the yield different from the coupon.",
           "Maturity is when the principal is due, if the issuer pays. Some bonds can be called or repaid early on terms written in the document.",
+        ],
+      },
+      {
+        heading: "What each bond is used for",
+        paragraphs: [
+          "A bond is a loan to the issuer. The use depends on whether you need the government’s credit, a company’s credit, or a tax treatment that the offer document actually states.",
+        ],
+        products: [
+          { name: "Government security", use: "Used when credit risk needs to stay low relative to a company bond. The price can still move with interest rates if you sell before maturity." },
+          { name: "Corporate bond", use: "Used to lend to a company or institution for a stated coupon and date. Credit risk is the chance they do not pay." },
+          { name: "Taxable bond", use: "Used as a normal bond, where interest or gains may be taxed. This is the usual case." },
+          { name: "Tax-free bond", use: "Used only when that specific issue is notified as tax-free. Most bonds are not." },
         ],
       },
       {

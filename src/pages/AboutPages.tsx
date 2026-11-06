@@ -51,7 +51,7 @@ export function AdvisorPage() {
         title="Advisor profile"
         lede={
           advisorIsPublished
-            ? `${advisor.name} is a mutual fund distributor in Pune. AMFI ARN 272207.`
+            ? `${advisor.name}, ${advisor.company}. AMFI ARN 272207.`
             : "Ask us on WhatsApp and we will tell you who you will be speaking with."
         }
         crumbs={[{ label: "Home", to: "/" }, { label: "About", to: "/about" }, { label: "Advisor" }]}
@@ -68,8 +68,10 @@ export function AdvisorPage() {
               />
             ) : null}
             <div className={advisor.photoSrc ? "lg:col-span-8" : "lg:col-span-12"}>
-              <h2 className="font-serif text-4xl text-navy">{advisor.name}</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-leaf">{advisor.company}</p>
+              <h2 className="mt-2 font-serif text-4xl text-navy">{advisor.name}</h2>
               {advisor.role ? <p className="mt-2 text-emerald">{advisor.role}</p> : null}
+              <p className="mt-4 font-serif text-xl text-ink">{advisor.commitment}</p>
               {advisor.experience ? <p className="mt-4 text-muted">{advisor.experience}</p> : null}
               <ProfileList title="Registrations" items={publishedRegistrations.map((item) => `${item.label} ${item.value}`)} />
               <ProfileList title="Qualifications" items={advisor.qualifications} />
@@ -78,6 +80,30 @@ export function AdvisorPage() {
                 {advisor.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
+              </div>
+              <div className="mt-10 space-y-6">
+                <h3 className="font-serif text-3xl text-navy">How the work is divided</h3>
+                {advisor.offerings.map((item) => (
+                  <article key={item.title}>
+                    <h4 className="font-semibold text-ink">{item.title}</h4>
+                    <p className="mt-2 leading-relaxed text-muted">{item.text}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="mt-10">
+                <h3 className="font-serif text-3xl text-navy">Professional philosophy</h3>
+                <ul className="mt-4 space-y-4">
+                  {advisor.philosophy.map((item) => (
+                    <li key={item.title} className="border-t border-line pt-4">
+                      <p className="font-semibold text-ink">{item.title}</p>
+                      <p className="mt-1 leading-relaxed text-muted">{item.text}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-10 border-t border-line pt-6">
+                <h3 className="font-serif text-3xl text-navy">Vision</h3>
+                <p className="mt-3 leading-relaxed text-ink">{advisor.vision}</p>
               </div>
             </div>
           </article>

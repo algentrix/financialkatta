@@ -12,7 +12,7 @@ export type WhatsAppIntent = keyof typeof whatsappMessages
 
 export const site = {
   name: "FinancialKatta",
-  legalName: "",
+  legalName: "Prasad Star Trading Company",
   tagline: "Har sapne ki taiyari, sahi financial planning ke saath.",
   supporting:
     "Whether you're starting your first SIP, planning a home, choosing insurance or thinking about the years ahead, we'll help you understand your options.",
@@ -36,10 +36,10 @@ export const site = {
     baseUrl: "https://wa.me/918177950709",
     messages: whatsappMessages,
   },
-  referralUrl: "",
+  referralUrl: "https://www.assetplus.in/mfd/ARN-272207",
   referralIntro: [
-    "Share FinancialKatta with a family member, colleague or friend who wants a clearer conversation about money.",
-    "An invitation is a request for a conversation. It is not a product recommendation, an approval or a promise of any reward.",
+    "Hey, I'm inviting you to invest with me on AssetPlus — India's leading Mutual Fund Distribution Platform. Join an ever-growing network of smart investors and take the first step towards maximising your wealth today! Fill this form to join as my client today.",
+    "The form is Prasad Prakashrao Chidrawar’s AssetPlus client link, AMFI ARN 272207. Mutual fund investments are subject to market risks. Read all scheme-related documents carefully. Joining is not a loan approval, an insurance cover or a promised return.",
   ],
   social: [] as { label: string; href: string }[],
   registrations: {

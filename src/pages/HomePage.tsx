@@ -367,7 +367,12 @@ export function HomePage() {
             <h2 className="mt-3 font-serif text-4xl font-bold leading-[1.1] text-ink sm:text-5xl">
               {advisorIsPublished ? advisor.name : "FinancialKatta"}
             </h2>
-            {advisorIsPublished ? <p className="mt-4 text-leaf">{advisor.role}</p> : null}
+            {advisorIsPublished ? (
+              <>
+                <p className="mt-3 text-sm font-semibold uppercase tracking-[0.14em] text-muted">{advisor.company}</p>
+                <p className="mt-2 text-leaf">{advisor.role}</p>
+              </>
+            ) : null}
             {publishedRegistrations.length > 0 ? (
               <ul className="mt-4 space-y-1 text-sm text-ink">
                 {publishedRegistrations.map((item) => (
@@ -378,7 +383,7 @@ export function HomePage() {
               </ul>
             ) : null}
             <div className="mt-6 space-y-4 leading-relaxed text-muted">
-              {(advisorIsPublished ? advisor.paragraphs : ["Message us on WhatsApp and we will tell you who will take the conversation."]).map((paragraph) => (
+              {(advisorIsPublished ? advisor.summary : ["Message us on WhatsApp and we will tell you who will take the conversation."]).map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>

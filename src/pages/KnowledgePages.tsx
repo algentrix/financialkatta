@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom"
 import { awarenessTopics } from "../content/awareness"
-import { getPost, posts } from "../content/blogs"
-import { faqs } from "../content/faqs"
+import { getPost, postsByCategory } from "../content/blogs"
+import { faqCategories, faqs } from "../content/faqs"
 import { isYoutubeId, videos } from "../content/videos"
 import { formatDisplayDate } from "../lib/format"
 import { breadcrumbJson, pageMeta } from "../seo/sitePages"
@@ -48,22 +48,35 @@ export function BlogsPage() {
       <PageHero
         eyebrow="Knowledge Centre"
         title="Blogs"
-        lede="Educational notes written for this website. They are not research reports and they are not personal advice."
+        lede="Articles are grouped by subject. They explain a choice. They are not research reports and they are not personal advice."
         crumbs={[{ label: "Home", to: "/" }, { label: "Knowledge Centre", to: "/knowledge" }, { label: "Blogs" }]}
       />
-      <div className="mx-auto grid max-w-6xl gap-5 px-5 py-14 md:grid-cols-2">
-        {posts.map((post) => (
-          <article key={post.slug} className="flex h-full flex-col border-t border-line py-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">{post.category}</p>
-            <h2 className="mt-3 font-serif text-3xl text-navy">{post.title}</h2>
-            <p className="mt-3 flex-1 leading-relaxed text-muted">{post.description}</p>
-            <p className="mt-4 text-sm text-muted">
-              {formatDisplayDate(post.date)} · {post.readingMinutes} min read
-            </p>
-            <Link to={`/knowledge/blogs/${post.slug}`} className="mt-4 text-sm font-semibold text-emerald">
-              Read article
-            </Link>
-          </article>
+      <div className="mx-auto max-w-6xl px-5 py-14">
+        <nav className="flex flex-wrap gap-3" aria-label="Article categories">
+          {postsByCategory().map((group) => (
+            <a key={group.title} href={`#${group.title.toLowerCase()}`} className="border border-line px-4 py-2 text-sm font-semibold text-ink hover:text-forest">
+              {group.title}
+            </a>
+          ))}
+        </nav>
+        {postsByCategory().map((group) => (
+          <section key={group.title} id={group.title.toLowerCase()} className="mt-12 scroll-mt-28">
+            <h2 className="font-serif text-3xl text-navy">{group.title}</h2>
+            <div className="mt-4 grid gap-5 md:grid-cols-2">
+              {group.posts.map((post) => (
+                <article key={post.slug} className="flex h-full flex-col border-t border-line py-7">
+                  <h3 className="font-serif text-2xl text-navy">{post.title}</h3>
+                  <p className="mt-3 flex-1 leading-relaxed text-muted">{post.description}</p>
+                  <p className="mt-4 text-sm text-muted">
+                    {formatDisplayDate(post.date)} · {post.readingMinutes} min read
+                  </p>
+                  <Link to={`/knowledge/blogs/${post.slug}`} className="mt-4 text-sm font-semibold text-emerald">
+                    Read article
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </>
@@ -225,22 +238,36 @@ export function FaqsPage() {
       <PageHero
         eyebrow="Knowledge Centre"
         title="FAQs"
-        lede="Short answers. Where a decision is personal, the honest next step is a conversation, not another paragraph."
+        lede="Questions are grouped by subject. Where a decision is personal, the next step is a conversation."
         crumbs={[{ label: "Home", to: "/" }, { label: "Knowledge Centre", to: "/knowledge" }, { label: "FAQs" }]}
       />
-      <div className="mx-auto max-w-3xl space-y-3 px-5 py-14">
-        {faqs.map((faq) => (
-          <details key={faq.question} className="group border-b border-line py-5">
-            <summary className="cursor-pointer list-none font-semibold text-navy [&::-webkit-details-marker]:hidden">
-              <span className="flex items-start justify-between gap-4">
-                {faq.question}
-                <span aria-hidden="true" className="text-emerald group-open:rotate-45">
-                  +
-                </span>
-              </span>
-            </summary>
-            <p className="mt-3 leading-relaxed text-muted">{faq.answer}</p>
-          </details>
+      <div className="mx-auto max-w-3xl px-5 py-14">
+        <nav className="flex flex-wrap gap-3" aria-label="FAQ categories">
+          {faqCategories.map((category) => (
+            <a key={category.id} href={`#${category.id}`} className="border border-line px-4 py-2 text-sm font-semibold text-ink hover:text-forest">
+              {category.title}
+            </a>
+          ))}
+        </nav>
+        {faqCategories.map((category) => (
+          <section key={category.id} id={category.id} className="mt-12 scroll-mt-28">
+            <h2 className="font-serif text-3xl text-navy">{category.title}</h2>
+            <div className="mt-2">
+              {category.items.map((faq) => (
+                <details key={faq.question} className="group border-b border-line py-5">
+                  <summary className="cursor-pointer list-none font-semibold text-navy [&::-webkit-details-marker]:hidden">
+                    <span className="flex items-start justify-between gap-4">
+                      {faq.question}
+                      <span aria-hidden="true" className="text-emerald group-open:rotate-45">
+                        +
+                      </span>
+                    </span>
+                  </summary>
+                  <p className="mt-3 leading-relaxed text-muted">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </>

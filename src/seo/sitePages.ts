@@ -85,7 +85,7 @@ export function allPages(): SeoPage[] {
     entry(
       "/about/advisor",
       "Advisor profile",
-      "Prasad Prakashrao Chidrawar is the mutual fund distributor for FinancialKatta in Pune. AMFI ARN 272207.",
+      "Prasad Prakashrao Chidrawar of Prasad Star Trading Company is the advisor for FinancialKatta in Pune. Mutual fund distributor, AMFI ARN 272207.",
       "monthly",
       "0.6",
       [homeCrumb, { name: "About", path: "/about" }, { name: "Advisor", path: "/about/advisor" }],

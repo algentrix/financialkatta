@@ -30,6 +30,18 @@ export function ServicePage() {
             <h2 className="font-serif text-3xl font-medium text-ink">What this means in practice</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink">{service.intro}</p>
           </section>
+          {service.start ? (
+            <section className="mt-12 border border-line bg-mint p-6 sm:p-8">
+              <h2 className="font-serif text-3xl font-medium text-ink">Get started</h2>
+              <p className="mt-4 max-w-2xl leading-relaxed text-ink">{service.start.note}</p>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+                Mutual fund investments are subject to market risks. Read all scheme-related documents carefully. This form joins you as a client of Prasad Prakashrao Chidrawar, AMFI ARN 272207. It is not a promised return.
+              </p>
+              <a href={service.start.href} target="_blank" rel="noopener noreferrer" className="btn-sage mt-5 inline-flex">
+                {service.start.label}
+              </a>
+            </section>
+          ) : null}
           {service.sections.map((section) => (
             <section key={section.heading} className="mt-12 border-t border-line pt-8">
               <h2 className="font-serif text-3xl font-medium text-ink">{section.heading}</h2>
@@ -38,12 +50,33 @@ export function ServicePage() {
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-              {section.points ? (
-                <ol className="mt-5 max-w-2xl list-decimal space-y-2 pl-5 leading-relaxed text-ink">
-                  {section.points.map((point) => (
-                    <li key={point}>{point}</li>
+              {section.products ? (
+                <ul className="mt-6 max-w-3xl divide-y divide-line border-y border-line">
+                  {section.products.map((product) => (
+                    <li key={product.name} className="grid gap-1 py-4 sm:grid-cols-[minmax(0,16rem)_1fr] sm:gap-6">
+                      <p className="font-semibold text-ink">{product.name}</p>
+                      <p className="leading-relaxed text-ink">{product.use}</p>
+                    </li>
                   ))}
-                </ol>
+                </ul>
+              ) : null}
+              {section.points ? (
+                <div className="mt-5 max-w-2xl">
+                  {section.pointsLabel ? <h3 className="font-semibold text-ink">{section.pointsLabel}</h3> : null}
+                  {section.pointsLabel ? (
+                    <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-ink">
+                      {section.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <ol className="list-decimal space-y-2 pl-5 leading-relaxed text-ink">
+                      {section.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ol>
+                  )}
+                </div>
               ) : null}
             </section>
           ))}
